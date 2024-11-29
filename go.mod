@@ -20,7 +20,7 @@ require (
 	github.com/stretchr/testify v1.9.0
 	golang.org/x/net v0.26.0
 	golang.org/x/sys v0.21.0
-	google.golang.org/grpc v1.64.0
+	google.golang.org/grpc v1.64.1
 	google.golang.org/protobuf v1.34.2
 	gopkg.in/freddierice/go-losetup.v1 v1.0.0-20170407175016-fc9adea44124
 	gopkg.in/yaml.v2 v2.4.0

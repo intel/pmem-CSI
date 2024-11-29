@@ -19,7 +19,6 @@ package volumepathhandler
 import (
 	"context"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 
@@ -294,7 +293,7 @@ func (v VolumePathHandler) IsDeviceBindMountExist(ctx context.Context, mapPath s
 func (v VolumePathHandler) GetDeviceBindMountRefs(ctx context.Context, devPath string, mapPath string) ([]string, error) {
 	ctx, logger := pmemlog.WithName(ctx, "GetDeviceBindMountRefs")
 	var refs []string
-	files, err := ioutil.ReadDir(mapPath)
+	files, err := os.ReadDir(mapPath)
 	if err != nil {
 		return nil, fmt.Errorf("directory cannot read %v", err)
 	}

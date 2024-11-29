@@ -13,7 +13,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"syscall"
@@ -99,7 +98,7 @@ func rmTmpfile(file *os.File) {
 }
 
 func TestExtents(t *testing.T) {
-	file, err := ioutil.TempFile("", "extents")
+	file, err := os.CreateTemp("", "extents")
 	if err != nil {
 		t.Fatalf("create temp file: %v", err)
 	}
@@ -149,7 +148,7 @@ func TestExtents(t *testing.T) {
 
 	// Now create a sparse copy. This should be almost
 	// instantaneous, despite the nominally large file.
-	copy, err := ioutil.TempFile(".", "copy")
+	copy, err := os.CreateTemp(".", "copy")
 	if err != nil {
 		t.Fatalf("create temp file: %v", err)
 	}

@@ -9,7 +9,7 @@ package gotests
 import (
 	"context"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strings"
 	"time"
@@ -90,7 +90,7 @@ var _ = deploy.Describe("direct-testing", "direct-testing-metrics", "", func(d *
 							if err != nil {
 								return
 							}
-							data, err := ioutil.ReadAll(resp.Body)
+							data, err := io.ReadAll(resp.Body)
 							framework.ExpectNoError(err, "read GET response for pod %s and url %s", pod, url)
 							name := pod.Name + "/" + container.Name
 							if isPmemCSI {

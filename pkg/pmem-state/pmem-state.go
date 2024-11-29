@@ -8,7 +8,6 @@ package pmemstate
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path"
 	"strings"
@@ -108,7 +107,7 @@ func (fs *fileState) Get(id string, dataPtr interface{}) error {
 // GetAll retrieves the names of all .json files found in fileState.location directory
 func (fs *fileState) GetAll() ([]string, error) {
 	fs.stateDirLock.Lock()
-	files, err := ioutil.ReadDir(fs.location)
+	files, err := os.ReadDir(fs.location)
 	fs.stateDirLock.Unlock()
 	if err != nil {
 		return nil, fmt.Errorf("failed to read metadata from %q: %w", fs.location, err)

@@ -7,7 +7,6 @@ package pmemstate_test
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path"
 	"strings"
@@ -59,7 +58,7 @@ var _ = Describe("pmem state", func() {
 
 	BeforeEach(func() {
 		var err error
-		stateDir, err = ioutil.TempDir("", "pmemstate-")
+		stateDir, err = os.MkdirTemp("", "pmemstate-")
 		Expect(err).NotTo(HaveOccurred())
 	})
 
@@ -88,7 +87,7 @@ var _ = Describe("pmem state", func() {
 			_, err = pmemstate.NewFileState("/unknown/base/directory/")
 			Expect(err).To(HaveOccurred())
 
-			file, err := ioutil.TempFile("", "pmemstate-file")
+			file, err := os.CreateTemp("", "pmemstate-file")
 			Expect(err).NotTo(HaveOccurred())
 			_, err = pmemstate.NewFileState(file.Name())
 			os.Remove(file.Name()) //nolint: errcheck

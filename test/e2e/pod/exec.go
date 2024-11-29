@@ -9,7 +9,6 @@ package pod
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path"
 	"strings"
@@ -32,7 +31,7 @@ func RunInPod(f *framework.Framework, rootdir string, files []string, command st
 	for _, file := range files {
 		base := path.Base(file)
 		full := path.Join(rootdir, file)
-		data, err := ioutil.ReadFile(full)
+		data, err := os.ReadFile(full)
 		framework.ExpectNoError(err, "read input file %q", full)
 		input.Write(data)
 		// Somehow count=1 bs=<total size> resulted in truncated data transfers.

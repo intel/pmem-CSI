@@ -14,7 +14,6 @@ package coverage
 
 import (
 	"flag"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"syscall"
@@ -32,7 +31,7 @@ func Run(main func() int) {
 		if err != nil {
 			klog.Fatalf("cover profile %q: %s", *coverage, err)
 		}
-		f, err := ioutil.TempFile(filepath.Dir(abspath), filepath.Base(abspath))
+		f, err := os.CreateTemp(filepath.Dir(abspath), filepath.Base(abspath))
 		if err != nil {
 			klog.Fatalf("temporary cover profile %q: %s", abspath, err)
 		}

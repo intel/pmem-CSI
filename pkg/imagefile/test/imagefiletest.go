@@ -16,7 +16,6 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"strings"
@@ -77,7 +76,7 @@ func testImageFile(t TInterface, fs imagefile.FsType, size imagefile.Bytes, expe
 		t.Skipf("parted not found: %v", err)
 	}
 
-	file, err := ioutil.TempFile("", "image")
+	file, err := os.CreateTemp("", "image")
 	if err != nil {
 		t.Fatalf("create temp file: %v", err)
 	}

@@ -6,7 +6,6 @@ SPDX-License-Identifier: Apache-2.0
 package v1beta1_test
 
 import (
-	"io/ioutil"
 	"os"
 	"testing"
 
@@ -135,7 +134,7 @@ spec:
 		It("should have valid json schema", func() {
 
 			crdFile := os.Getenv("REPO_ROOT") + "/deploy/crd/pmem-csi.intel.com_pmemcsideployments.yaml"
-			data, err := ioutil.ReadFile(crdFile)
+			data, err := os.ReadFile(crdFile)
 			Expect(err).ShouldNot(HaveOccurred(), "load crd data")
 			crd := &apiextensions.CustomResourceDefinition{}
 

@@ -165,7 +165,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -258,7 +257,7 @@ func Create(filename string, size Bytes, fs FsType) error {
 
 	// We write MBRs and rootfs into temporary files, then copy into the
 	// final image file at the end.
-	tmp, err := ioutil.TempDir("", "pmem-csi-imagefile")
+	tmp, err := os.MkdirTemp("", "pmem-csi-imagefile")
 	if err != nil {
 		return fmt.Errorf("temp dir: %w", err)
 	}

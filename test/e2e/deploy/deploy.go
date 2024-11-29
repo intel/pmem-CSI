@@ -10,7 +10,7 @@ import (
 	"bufio"
 	"context"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"os"
 	"os/exec"
@@ -138,7 +138,7 @@ func GetMetrics(ctx context.Context, c *Cluster, url string) (map[string]*cm.Met
 		return nil, fmt.Errorf("get controller metrics: %v", err)
 	}
 	if resp.StatusCode != 200 {
-		body, _ := ioutil.ReadAll(resp.Body)
+		body, _ := io.ReadAll(resp.Body)
 		suffix := ""
 		if len(body) > 0 {
 			suffix = "\n" + string(body)
